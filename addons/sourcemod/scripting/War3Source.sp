@@ -152,6 +152,7 @@ new bool:war3source_config_loaded;
 
 new Handle:g_OnWar3EventSpawnFH;
 new Handle:g_OnWar3EventDeathFH;
+new Handle:g_OnWar3EventWeaponChange;
 
 new Handle:g_CheckCompatabilityFH;
 new Handle:g_War3InterfaceExecFH;
@@ -231,7 +232,8 @@ bool:War3Source_InitForwards()
 
     g_OnWar3EventSpawnFH = CreateGlobalForward("OnWar3EventSpawn", ET_Ignore, Param_Cell);
     g_OnWar3EventDeathFH = CreateGlobalForward("OnWar3EventDeath", ET_Ignore, Param_Cell, Param_Cell, Param_Cell);
-
+    g_OnWar3EventWeaponChange = CreateGlobalForward("OnWar3EventWeaponChange", ET_Ignore, Param_Cell, Param_Cell, Param_Cell);
+    
     g_CheckCompatabilityFH = CreateGlobalForward("CheckWar3Compatability", ET_Ignore, Param_String);
     g_War3InterfaceExecFH = CreateGlobalForward("War3InterfaceExec", ET_Ignore);
 
@@ -376,7 +378,11 @@ bool:War3Source_HookEvents()
         PrintToServer("[War3Source] Could not hook the player_death event.");
         return false;
     }
-
+    if(!HookEventEx("item_equip", War3Source_WeaponChangeEvent, EventHookMode_Pre))
+    {
+        PrintToServer("[War3Source] Could not hook the weapon_change event.");
+        return false;
+    }
     return true;
 
 }
@@ -514,6 +520,19 @@ public Action:War3Source_PlayerDeathEvent(Handle:event,const String:name[],bool:
     return Plugin_Continue;
 }
 
+public War3Source_WeaponChangeEvent(Handle:event,const String:name[],bool:dontBroadcast)
+{
+    new weapon_type = GetEventInt(event, "weptype");
+    new String:weapon_name[128];
+    GetEventString(event, "item", weapon_name, sizeof(weapon_name));
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
+    if(ValidPlayer(client,true))
+    {
+        if (!dontBroadcast) {
+            DoForward_OnWar3EventWeaponChange(client, weapon_type);
+        }
+    }
+}
 
 CheckPendingRace(client)
 {
@@ -638,6 +657,14 @@ DoForward_OnWar3EventDeath(victim,killer,deathrace)
     Call_PushCell(victim);
     Call_PushCell(killer);
     Call_PushCell(deathrace);
+    Call_Finish();
+}
+
+DoForward_OnWar3EventWeaponChange(client, weapon_type)
+{
+    Call_StartForward(g_OnWar3EventWeaponChange);
+    Call_PushCell(client);
+    Call_PushCell(weapon_type);
     Call_Finish();
 }
 

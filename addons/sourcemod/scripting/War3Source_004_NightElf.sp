@@ -40,12 +40,12 @@ new SKILL_EVADE, SKILL_THORNS, SKILL_TRUESHOT, ULT_ENTANGLE;
 new Float:fEvadeChance[5] = {0.0, 0.05, 0.07, 0.13, 0.15};
 new Float:ThornsReturnDamage[5] = {0.0, 0.05, 0.09, 0.13, 0.17};
 new Float:TrueshotDamagePercent[5] = {1.0, 1.05, 1.09, 1.13, 1.17};
-new Float:EntangleDistance = 600.0;
-new Float:EntangleDuration[5] = {0.0, 1.25, 1.5, 1.75, 2.0};
+new Float:EntangleDistance = 9999.0;
+new Float:EntangleDuration[5] = {0.0, 2.25, 2.5, 2.75, 3.0};
 
 public OnPluginStart()
 {
-    EntangleCooldownCvar=CreateConVar("war3_nightelf_entangle_cooldown", "20", "Cooldown timer.");
+    EntangleCooldownCvar=CreateConVar("war3_nightelf_entangle_cooldown", "30", "Cooldown timer.");
 
     LoadTranslations("w3s.race.nightelf.phrases.txt");
 }

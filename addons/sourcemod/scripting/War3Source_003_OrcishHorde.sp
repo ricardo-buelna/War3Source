@@ -53,7 +53,7 @@ new MyWeaponsOffset,AmmoOffset;
 new Float:ReincarnationChance[5]={0.0,0.15,0.37,0.59,0.8};
 new Float:CriticalStrikePercent[5]={0.0,0.33,0.66,1.01,1.33}; 
 new Float:CriticalGrenadePercent[5]={0.0,0.7,1.2,1.7,2.2};
-new Float:ChainDistance[5]={0.0,150.0,200.0,250.0,300.0};
+new Float:ChainDistance[5]={0.0,200.0,450.0,600.0,750.0};
 
 
 new Float:WindWalkAlpha[5]={1.0,0.84,0.68,0.56,0.40};
@@ -243,7 +243,7 @@ public OnUltimateCommand(client,race,bool:pressed)
                 
                 new Float:distance=ChainDistance[skill];
                 
-                DoChain(client,distance,60,true,0); // This function should also handle if there aren't targets
+                DoChain(client,distance,35,true,0); // This function should also handle if there aren't targets
             }
         }
         else

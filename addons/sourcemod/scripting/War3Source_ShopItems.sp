@@ -86,7 +86,7 @@ public OnPluginStart()
     hMaskLeechCvar = CreateConVar("war3_shop_mask_percent", "0.30", "Percent of damage rewarded for Mask of Death, from 0.0 - 1.0");
     hOrbSlowCvar = CreateConVar("war3_shop_orb_speed","0.6", "Orb of Frost speed, 1.0 is normal speed, 0.6 default for orb.");
     hTomeXPCvar = CreateConVar("war3_shop_tome_xp","100", "Experience awarded for Tome of Experience.");
-    hSockGravityCvar = CreateConVar("war3_shop_sock_gravity", "0.4", "Gravity used for Sock of Feather, 0.4 is default for sock, 1.0 is normal gravity");
+    hSockGravityCvar = CreateConVar("war3_shop_sock_gravity", "0.6", "Gravity used for Sock of Feather, 0.6 is default for sock, 1.0 is normal gravity");
     hMoleDeathmatchAllowedCvar = CreateConVar("war3_shop_mole_dm", "0", "Set this to 1 if server is deathmatch");
     hRegenHPCvar = CreateConVar("war3_shop_ring_hp", GameTF() ? "4" : "2", "How much HP is regenerated per second");
 
@@ -130,7 +130,7 @@ public OnWar3LoadRaceOrItemOrdered(num)
         iShopitem[ITEM_HEALTH] = War3_CreateShopItemT("health", 3);
         iShopitem[ITEM_RESPAWN] = War3_CreateShopItemT("scroll", 15, false);
         
-        War3_AddItemBuff(iShopitem[ITEM_HEALTH], iAdditionalMaxHealth, 50);
+        War3_AddItemBuff(iShopitem[ITEM_HEALTH], iAdditionalMaxHealth, 30);
 
         iShopitem[ITEM_TOME] = War3_CreateShopItemT("tome", 10);
         War3_SetItemProperty(iShopitem[ITEM_TOME], ITEM_USED_ON_BUY, true);
@@ -168,7 +168,7 @@ doCloak()
 			new iWeaponEntity = W3GetCurrentWeaponEnt(x);
 			if(War3_IsMeleeWeapon(iWeaponEntity))
 			{
-				War3_SetBuffItem(x, fInvisibilityItem, iShopitem[ITEM_CLOAK], 0.4);
+				War3_SetBuffItem(x, fInvisibilityItem, iShopitem[ITEM_CLOAK], 0.3);
 			} else {
 				War3_SetBuffItem(x, fInvisibilityItem, iShopitem[ITEM_CLOAK], 0.6);
 			}
@@ -245,8 +245,8 @@ public OnWar3EventSpawn(client)
     
     if(War3_GetOwnsItem(client, iShopitem[ITEM_HEALTH]))
     {
-        War3_SetBuffItem(client, iAdditionalMaxHealth, iShopitem[ITEM_HEALTH], 50);
-        War3_ChatMessage(client, "%T", "+50 HP", client);
+        War3_SetBuffItem(client, iAdditionalMaxHealth, iShopitem[ITEM_HEALTH], 30);
+        War3_ChatMessage(client, "%T", "+30 HP", client);
     }
     
     if(War3_GetOwnsItem(client, iShopitem[ITEM_SOCK]))
@@ -362,7 +362,7 @@ public OnItemPurchase(client,item)
     
     if(War3_GetGame() != Game_TF && item == iShopitem[ITEM_HEALTH] && IsPlayerAlive(client))
     {
-        War3_ChatMessage(client, "%T", "+50 HP", client);
+        War3_ChatMessage(client, "%T", "+30 HP", client);
     }
     
     if(item == iShopitem[ITEM_TOME])

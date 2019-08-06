@@ -49,7 +49,7 @@ new Float:BeetleChanceArr[]={0.0,0.05,0.1,0.15,0.20};
 //ultimate
 new Handle:ultCooldownCvar;
 new Handle:ultRangeCvar;
-new Float:LocustDamagePercent[]={0.0,0.1,0.2,0.3,0.4};
+new Float:LocustDamagePercent[]={0.0,0.1,0.2,0.25,0.30};
 
 //new String:ultimateSound[]="war3source/locustswarmloop.wav";
 new String:ultimateSound[256]; //="war3source/locustswarmloop.mp3";
@@ -57,8 +57,8 @@ new String:ultimateSound[256]; //="war3source/locustswarmloop.mp3";
 public OnPluginStart()
 {
     
-    ultCooldownCvar=CreateConVar("war3_crypt_locust_cooldown","20","Cooldown between ultimate usage");
-    ultRangeCvar=CreateConVar("war3_crypt_locust_range","800","Range of locust ultimate");
+    ultCooldownCvar=CreateConVar("war3_crypt_locust_cooldown","30","Cooldown between ultimate usage");
+    ultRangeCvar=CreateConVar("war3_crypt_locust_range","9999","Range of locust ultimate");
     
     LoadTranslations("w3s.race.crypt.phrases.txt");
 }

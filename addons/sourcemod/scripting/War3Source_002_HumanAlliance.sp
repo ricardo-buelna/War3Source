@@ -32,14 +32,13 @@ new Handle:ultCooldownCvar;
 
 // Chance/Info Arrays
 new Float:BashChance[5]={0.0,0.07,0.13,0.19,0.25};
-new Float:TeleportDistance[5]={0.0,600.0,700.0,850.0,1000.0};
-//TEST ONLY
-//new Float:TeleportDistance[5]={0.0,240.0,240.0,240.0,240.0};
+//new Float:TeleportDistance[5]={0.0,600.0,700.0,850.0,1000.0};
+new Float:TeleportDistance[5]={0.0,600.0,1000.0,2000.0,9999.0};
 
 new Float:InvisibilityAlphaTF[5]={1.0,0.84,0.68,0.56,0.40};
 
-new Float:InvisibilityAlphaCS[5]={1.0,0.90,0.8,0.7,0.6};
-
+new Float:InvisibilityAlphaCS[5]={1.0,0.9,0.8,0.7,0.6};
+new Float:InvisibilityAlphaCSKnife[5]={1.0,0.4,0.3,0.2,0.1};
 
 new DevotionHealth[5]={0,15,25,35,45};
 
@@ -62,7 +61,7 @@ new String:teleportSound[256];
 
 public OnPluginStart()
 {
-    ultCooldownCvar = CreateConVar("war3_human_teleport_cooldown","20.0","Cooldown between teleports");
+    ultCooldownCvar = CreateConVar("war3_human_teleport_cooldown","30.0","Cooldown between teleports");
     
     LoadTranslations("w3s.race.human.phrases.txt");
 }
@@ -192,6 +191,8 @@ public OnUltimateCommand(client,race,bool:pressed)
                 if(success)
                 {
                     //new Float:cooldown=GetConVarFloat(ultCooldownCvar);
+                    W3FlashScreen(client, RGBA_COLOR_WHITE, 0.3, _, FFADE_OUT);
+                    War3_ShakeScreen(client);
                     War3_CooldownMGR(client,cooldown,customerrace,customerskill,_,_);
                 }
             }
@@ -205,6 +206,19 @@ public OnUltimateCommand(client,race,bool:pressed)
 
 }
 
+public OnWar3EventWeaponChange(client, weapon_type)
+{
+    if(RaceDisabled)
+    {
+        return;
+    }
+    new level = War3_GetSkillLevel(client, thisRaceID, SKILL_INVIS);
+    if (weapon_type == 0) {
+        War3_SetBuff(client,fInvisibilitySkill,thisRaceID,InvisibilityAlphaCSKnife[level]);
+    } else {
+        War3_SetBuff(client,fInvisibilitySkill,thisRaceID,InvisibilityAlphaCS[level]);
+    }
+}
 
 
 public OnSkillLevelChanged(client,race,skill,newskilllevel)
@@ -445,6 +459,4 @@ public bool:enemyImmunityInRange(client,Float:playerVec[3])
         }
     }
     return false;
-}             
-
-    
+}

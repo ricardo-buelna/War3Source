@@ -249,11 +249,11 @@ War3_TriedToBuyItem(client, item, bool:reshowmenu=true)
             War3_ChatMessage(client, "%T", "You cannot buy items during warmup", GetTrans());
             bCanBuy = false;
         }
-        else if(GAMECSGO && bRoundEnd && War3_GetCurrencyMode() == CURRENCY_MODE_DORRAR)
-        {
-            War3_ChatMessage(client, "%T", "You cannot buy items during round end", GetTrans());
-            bCanBuy = false;
-        }
+        // else if(GAMECSGO && bRoundEnd && War3_GetCurrencyMode() == CURRENCY_MODE_DORRAR)
+        // {
+        //     War3_ChatMessage(client, "%T", "You cannot buy items during round end", GetTrans());
+        //     bCanBuy = false;
+        // }
         else if(W3IsItemDisabledForRace(race,item)) 
         {
             new String:racename[64];

@@ -42,6 +42,6 @@
 	}
 	"nightelf_skill_EntanglingRoots_desc"
 	{
-		"en"		"Bind enemies to the ground, rendering them immobile for 1.25/1.5/1.75/2 seconds"
+		"en"		"Bind enemies to the ground, rendering them immobile for 2.25/2.5/2.75/3 seconds"
 	}
 }

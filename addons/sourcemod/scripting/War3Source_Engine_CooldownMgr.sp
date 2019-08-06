@@ -400,8 +400,8 @@ CooldownExpired(i,bool:expiredByTimer)
                 Format(str,sizeof(str),"%T","{ultimate} Is Ready",client,skillname);
                 W3Hint(client,HINT_COOLDOWN_EXPIRED,4.0,str);
                 W3Hint(client,HINT_COOLDOWN_NOTREADY,0.0,""); //if something is ready, force erase the not ready
-            
-                EmitSoundToAllAny( War3_IsSkillUltimate(raceid,skillNum)?ultimateReadySound:abilityReadySound , client);
+                EmitSountToClientAny(client, War3_IsSkillUltimate(raceid,skillNum)?ultimateReadySound:abilityReadySound);
+                //EmitSoundToAllAny( War3_IsSkillUltimate(raceid,skillNum)?ultimateReadySound:abilityReadySound , client);
             }
         }
     }
