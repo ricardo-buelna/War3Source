@@ -167,9 +167,7 @@ public Native_BashEffect(Handle:plugin, numParams)
     new attacker = GetNativeCell(2);
     
     W3FlashScreen(victim, RGBA_COLOR_RED);
-
-    W3SetPlayerColor(victim,War3_GetRace(victim),0,255,255,_,GLOW_ULTIMATE);
-    CreateTimer(0.5,W3ResetPlayerColor(victim,War3_GetRace(victim)),victim);
+    War3_ShakeScreen(victim, 0.5, 20.0, 15.0);
     
     W3Hint(victim, HINT_SKILL_STATUS, 1.0, "%T", "RcvdBash", victim);
     W3Hint(attacker, HINT_SKILL_STATUS, 1.0, "%T", "Bashed", attacker);
