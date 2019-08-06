@@ -38,7 +38,7 @@ new Float:TeleportDistance[5]={0.0,600.0,1000.0,2000.0,9999.0};
 new Float:InvisibilityAlphaTF[5]={1.0,0.84,0.68,0.56,0.40};
 
 new Float:InvisibilityAlphaCS[5]={1.0,0.9,0.8,0.7,0.6};
-new Float:InvisibilityAlphaCSKnife[5]={1.0,0.7,0.6,0.5,0.4};
+new Float:InvisibilityAlphaCSKnife[5]={1.0,0.5,0.4,0.3,0.2};
 
 new DevotionHealth[5]={0,15,25,35,45};
 

@@ -113,29 +113,29 @@ public OnWar3LoadRaceOrItemOrdered(num)
         
         if(GAMECSANY)
         {
-            iShopitem[ITEM_ANKH] = War3_CreateShopItemT("ankh", 3, false);
-            iShopitem[ITEM_GLOVES] = War3_CreateShopItemT("glove", 5);
-            iShopitem[ITEM_MOLE] = War3_CreateShopItemT("mole", 10, false);
+            iShopitem[ITEM_ANKH] = War3_CreateShopItemT("ankh", 1500, false);
+            iShopitem[ITEM_GLOVES] = War3_CreateShopItemT("glove", 1750);
+            iShopitem[ITEM_MOLE] = War3_CreateShopItemT("mole", 16000, false);
         }
 
-        iShopitem[ITEM_BOOTS] = War3_CreateShopItemT("boot", 3);
-        iShopitem[ITEM_CLAW] = War3_CreateShopItemT("claw", 3);
-        iShopitem[ITEM_CLOAK] = War3_CreateShopItemT("cloak", 2);
-        iShopitem[ITEM_MASK] = War3_CreateShopItemT("mask", 3);
-        iShopitem[ITEM_NECKLACE] = War3_CreateShopItemT("lace", 2);
-        iShopitem[ITEM_FROST] = War3_CreateShopItemT("orb", 3);
-        iShopitem[ITEM_RING] = War3_CreateShopItemT("ring", 3);
-        iShopitem[ITEM_ANTIWARD] = War3_CreateShopItemT("antiward", 3);
+        iShopitem[ITEM_BOOTS] = War3_CreateShopItemT("boot", 2500);
+        iShopitem[ITEM_CLAW] = War3_CreateShopItemT("claw", 1000);
+        iShopitem[ITEM_CLOAK] = War3_CreateShopItemT("cloak", 800);
+        iShopitem[ITEM_MASK] = War3_CreateShopItemT("mask", 2000);
+        iShopitem[ITEM_NECKLACE] = War3_CreateShopItemT("lace", 800);
+        iShopitem[ITEM_FROST] = War3_CreateShopItemT("orb", 2000);
+        iShopitem[ITEM_RING] = War3_CreateShopItemT("ring", 1000);
+        iShopitem[ITEM_ANTIWARD] = War3_CreateShopItemT("antiward", 800);
 
-        iShopitem[ITEM_HEALTH] = War3_CreateShopItemT("health", 3);
-        iShopitem[ITEM_RESPAWN] = War3_CreateShopItemT("scroll", 15, false);
+        iShopitem[ITEM_HEALTH] = War3_CreateShopItemT("health", 1000);
+        iShopitem[ITEM_RESPAWN] = War3_CreateShopItemT("scroll", 6000, false);
         
         War3_AddItemBuff(iShopitem[ITEM_HEALTH], iAdditionalMaxHealth, 30);
 
-        iShopitem[ITEM_TOME] = War3_CreateShopItemT("tome", 10);
+        iShopitem[ITEM_TOME] = War3_CreateShopItemT("tome", 4000);
         War3_SetItemProperty(iShopitem[ITEM_TOME], ITEM_USED_ON_BUY, true);
 
-        iShopitem[ITEM_SOCK] = War3_CreateShopItemT("sock", 2);
+        iShopitem[ITEM_SOCK] = War3_CreateShopItemT("sock", 1500);
         
         War3_AddItemBuff(iShopitem[ITEM_ANTIWARD], bImmunityWards, true);
         War3_AddItemBuff(iShopitem[ITEM_SOCK], fLowGravityItem, GetConVarFloat(hSockGravityCvar));
