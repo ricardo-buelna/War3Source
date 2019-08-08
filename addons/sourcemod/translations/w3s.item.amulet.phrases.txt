@@ -1,0 +1,11 @@
+"Phrases"
+{
+	"amulet_ItemName"
+	{
+		"en"		"Amulet of the Cat"
+	}
+	"amulet_ItemDesc"
+	{
+		"en"		"Makes your footsteps silent"
+	}
+}
