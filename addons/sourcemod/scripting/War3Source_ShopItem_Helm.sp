@@ -34,7 +34,7 @@ public OnWar3LoadRaceOrItemOrdered2(num)
 {
     if(num==100){
     
-        thisItem = War3_CreateShopItemT("helm", 10, true);
+        thisItem = War3_CreateShopItemT("helm", 3000, true);
     }    
 }
 public OnClientPutInServer(client)
