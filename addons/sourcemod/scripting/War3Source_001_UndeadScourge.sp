@@ -37,11 +37,23 @@ new Float:UnholySpeed[5] = {1.0, 1.10, 1.15, 1.20, 1.30};
 new Float:LevitationGravity[5] = {1.0, 0.75, 0.6, 0.5, 0.4};
 new Float:VampirePercent[5] = {0.0, 0.05, 0.10, 0.15, 0.20};
 
+new bool:UltimatePrimed = false;
+new Float:UltimatePrimedTime = 5.0;
+new Float:UltimateSoundPrimedTime = 1.0;
+new String:primedSound[256];
+new Handle:UltimatePrimedTimerHandle;
+
 new SKILL_LEECH, SKILL_SPEED, SKILL_LOWGRAV, SKILL_SUICIDE;
 
 public OnPluginStart()
 {
     LoadTranslations("w3s.race.undead.phrases.txt");
+}
+
+public OnMapStart()
+{
+    War3_AddSoundFolder(primedSound, sizeof(primedSound), "primed.mp3");
+    War3_AddCustomSound(primedSound);
 }
 
 public OnWar3LoadRaceOrItemOrdered(num)
@@ -74,7 +86,18 @@ public OnUltimateCommand(client, race, bool:pressed)
         new ult_level = War3_GetSkillLevel(client, race, SKILL_SUICIDE);
         if(ult_level > 0)
         {
-		    ForcePlayerSuicide(client);
+            if ( UltimatePrimed )
+            {
+                CloseHandle(UltimatePrimedTimerHandle);
+                ForcePlayerSuicide(client);
+            }
+            else
+            {
+                UltimatePrimed = true;
+                W3EmitSoundToAll(primedSound, client);
+                UltimatePrimedTimerHandle = CreateTimer(UltimateSoundPrimedTime, EmitUltimatePrimedSound, client, TIMER_REPEAT);
+                CreateTimer(UltimatePrimedTime,UnReadyUltimate,client);
+            }
         }
         else
         {
@@ -83,11 +106,28 @@ public OnUltimateCommand(client, race, bool:pressed)
     }
 }
 
+public Action:UnReadyUltimate(Handle:h,any:client)
+{
+    UltimatePrimed = false;
+    CloseHandle(UltimatePrimedTimerHandle);
+}
+
+public Action:EmitUltimatePrimedSound(Handle:h,any:client)
+{
+    W3EmitSoundToAll(primedSound, client);
+}
+
 public OnWar3EventDeath(victim, attacker)
 {
     if(RaceDisabled)
     {
         return;
+    }
+
+    if( UltimatePrimed )
+    {
+        UltimatePrimed = false;
+        CloseHandle(UltimatePrimedTimerHandle);
     }
 
     new race = W3GetVar(DeathRace);
