@@ -542,18 +542,9 @@ public War3Source_WeaponChangeEvent(Handle:event,const String:name[],bool:dontBr
 public War3Source_PlayerFootstepEvent(Handle:event, const String:name[], bool:dontBroadcast)
 {
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    PrintToServer("Got Player Footstep");
-    new old_value = GetEntProp(client, Prop_Data, "m_fFlags");
-    PrintToServer("Old Player Prop_data value " + old_value);
-    if (W3GetBuffHasTrue(client, bSilent)) // Player has Amulet of the Cat, setting flag to 4
+    if (W3GetBuffHasTrue(client, bSilent)) // Player has Amulet of the Cat, setting flag to 4 Meaning player is crouching.
     {
-        PrintToServer("Player Has Amulet of the Cat");
         SetEntProp(client, Prop_Data, "m_fFlags", 4);
-    } 
-    else if(old_value == 4) // Player Had Amulet of the Cat but now does not, so going to reset the flag to default
-    {
-        PrintToServer("Player Had Amulet of the Cat but now does not, reseting footsteps");
-        SetEntProp(client, Prop_Data, "m_fFlags", 0);
     }
 }
 
