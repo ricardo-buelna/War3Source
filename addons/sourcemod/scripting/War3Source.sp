@@ -383,9 +383,14 @@ bool:War3Source_HookEvents()
         PrintToServer("[War3Source] Could not hook the weapon_change event.");
         return false;
     }
+    if(!HookEventEx("player_footstep", War3Source_PlayerFootstepEvent, EventHookMode_Pre))
+    {
+        PrintToServer("[War3Source] Could not hook the player_footstep event.");
+        return false;
+    }
     return true;
-
 }
+
 
 public War3Source_PlayerSpawnEvent(Handle:event,const String:name[],bool:dontBroadcast)
 {
@@ -531,6 +536,24 @@ public War3Source_WeaponChangeEvent(Handle:event,const String:name[],bool:dontBr
         if (!dontBroadcast) {
             DoForward_OnWar3EventWeaponChange(client, weapon_type);
         }
+    }
+}
+
+public War3Source_PlayerFootstepEvent(Handle:event, const String:name[], bool:dontBroadcast)
+{
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
+    PrintToServer("Got Player Footstep");
+    new old_value = GetEntProp(client, Prop_Data, "m_fFlags");
+    PrintToServer("Old Player Prop_data value " + old_value);
+    if (W3GetBuffHasTrue(client, bSilent)) // Player has Amulet of the Cat, setting flag to 4
+    {
+        PrintToServer("Player Has Amulet of the Cat");
+        SetEntProp(client, Prop_Data, "m_fFlags", 4);
+    } 
+    else if(old_value == 4) // Player Had Amulet of the Cat but now does not, so going to reset the flag to default
+    {
+        PrintToServer("Player Had Amulet of the Cat but now does not, reseting footsteps");
+        SetEntProp(client, Prop_Data, "m_fFlags", 0);
     }
 }
 
