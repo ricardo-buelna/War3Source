@@ -368,6 +368,16 @@ public OnItemPurchase(client,item)
             War3_ChatMessage(client, "%T", "You pull on your socks", client);
         }
     }
+
+    if(item == iShopitem[ITEM_AMULET])
+    {
+       
+        if(IsPlayerAlive(client))
+        {
+            War3_ChatMessage(client, "%T", "Your footsteps become silent", client);
+        }
+    }
+    
     
     if(War3_GetGame() != Game_TF && item == iShopitem[ITEM_HEALTH] && IsPlayerAlive(client))
     {
