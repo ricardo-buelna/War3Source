@@ -292,7 +292,7 @@ enum W3Buff
   fSlow, //for decreeasing speeds only! MUST BE LESS THAN 1.0
   fSlow2, //for decreeasing speeds only! MUST BE LESS THAN 1.0. allows a race to have stacking slows
   bSlowImmunity, //immune to slow?
-  
+  bSilent, //are clients footsteps silent
   bImmunitySkills, //is immune to skills
   bImmunityUltimates, // is immune to ultimates 
   bImmunityWards, // is immune to wards, skill immunity includes ward immunity
@@ -438,6 +438,9 @@ stock InitiateBuffPropertiesArray(buffpropertiesarray[W3Buff][W3BuffProperties])
   buffpropertiesarray[ bImmunityItems ][DefaultValue]=false;
   buffpropertiesarray[ bImmunityItems ][BuffStackType]=bHasOneTrue;
 
+  buffpropertiesarray[ bSilent ][DefaultValue]=false;
+  buffpropertiesarray[ bSilent ][BuffStackType]=bHasOneTrue;
+
   buffpropertiesarray[ bImmunityAbilities ][DefaultValue]=false;
   buffpropertiesarray[ bImmunityAbilities ][BuffStackType]=bHasOneTrue;
 
@@ -499,8 +502,6 @@ stock InitiateBuffPropertiesArray(buffpropertiesarray[W3Buff][W3BuffProperties])
   
   buffpropertiesarray[ fGlowSetTime ][DefaultValue]=0;
   buffpropertiesarray[ fGlowSetTime ][BuffStackType]=DoNotCache;  
-  
-  
   
   buffpropertiesarray[ fHPRegen][DefaultValue]=0.0;
   buffpropertiesarray[ fHPRegen][BuffStackType]=fAbsolute;  

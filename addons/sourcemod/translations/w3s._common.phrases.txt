@@ -1157,9 +1157,13 @@
 	{
 		"en"		"You pull on your socks."
 	}
-	"+50 HP"
+    "Your footsteps become silent"
 	{
-		"en"		"+50 HP"
+		"en"		"Your footsteps become silent"
+	}
+	"+30 HP"
+	{
+		"en"		"+30 HP"
 	}
 	"+{amount} XP"
 	{

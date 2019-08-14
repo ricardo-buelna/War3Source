@@ -383,9 +383,14 @@ bool:War3Source_HookEvents()
         PrintToServer("[War3Source] Could not hook the weapon_change event.");
         return false;
     }
+    if(!HookEventEx("player_footstep", War3Source_PlayerFootstepEvent, EventHookMode_Pre))
+    {
+        PrintToServer("[War3Source] Could not hook the player_footstep event.");
+        return false;
+    }
     return true;
-
 }
+
 
 public War3Source_PlayerSpawnEvent(Handle:event,const String:name[],bool:dontBroadcast)
 {
@@ -531,6 +536,15 @@ public War3Source_WeaponChangeEvent(Handle:event,const String:name[],bool:dontBr
         if (!dontBroadcast) {
             DoForward_OnWar3EventWeaponChange(client, weapon_type);
         }
+    }
+}
+
+public War3Source_PlayerFootstepEvent(Handle:event, const String:name[], bool:dontBroadcast)
+{
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
+    if (W3GetBuffHasTrue(client, bSilent)) // Player has Amulet of the Cat, setting flag to 4 Meaning player is crouching.
+    {
+        SetEntProp(client, Prop_Data, "m_fFlags", 4);
     }
 }
 

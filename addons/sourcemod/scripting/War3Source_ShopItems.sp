@@ -23,6 +23,7 @@ enum {
     ITEM_HEALTH,
     ITEM_TOME,
     ITEM_RESPAWN,
+    ITEM_AMULET,
     ITEM_SOCK,
     ITEM_GLOVES,
     ITEM_RING,
@@ -136,7 +137,10 @@ public OnWar3LoadRaceOrItemOrdered(num)
         War3_SetItemProperty(iShopitem[ITEM_TOME], ITEM_USED_ON_BUY, true);
 
         iShopitem[ITEM_SOCK] = War3_CreateShopItemT("sock", 1500);
-        
+
+        iShopitem[ITEM_AMULET] = War3_CreateShopItemT("amulet", 1500);
+        War3_AddItemBuff(iShopitem[ITEM_AMULET], bSilent, true);
+
         War3_AddItemBuff(iShopitem[ITEM_ANTIWARD], bImmunityWards, true);
         War3_AddItemBuff(iShopitem[ITEM_SOCK], fLowGravityItem, GetConVarFloat(hSockGravityCvar));
         War3_AddItemBuff(iShopitem[ITEM_NECKLACE], bImmunityUltimates, true);
@@ -254,6 +258,11 @@ public OnWar3EventSpawn(client)
         War3_SetBuffItem(client, fLowGravityItem, iShopitem[ITEM_SOCK], GetConVarFloat(hSockGravityCvar));
         War3_ChatMessage(client, "%T", "You pull on your socks", client);
     }
+
+    if(War3_GetOwnsItem(client, iShopitem[ITEM_AMULET]))
+    {
+        War3_ChatMessage(client, "%T", "Your footsteps become silent", client);
+    }
     
     if(War3_GetGame() != Game_TF && 
        War3_GetOwnsItem(client,iShopitem[ITEM_MOLE]) && 
@@ -359,6 +368,16 @@ public OnItemPurchase(client,item)
             War3_ChatMessage(client, "%T", "You pull on your socks", client);
         }
     }
+
+    if(item == iShopitem[ITEM_AMULET])
+    {
+       
+        if(IsPlayerAlive(client))
+        {
+            War3_ChatMessage(client, "%T", "Your footsteps become silent", client);
+        }
+    }
+    
     
     if(War3_GetGame() != Game_TF && item == iShopitem[ITEM_HEALTH] && IsPlayerAlive(client))
     {
