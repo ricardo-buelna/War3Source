@@ -33,15 +33,17 @@ new Float:SuicideBomberRadius[5] = {0.0, 300.0, 350.0, 400.0, 450.0};
 new Float:SuicideBomberDamage[5] = {0.0, 166.0, 200.0, 233.0, 266.0};
 new Float:SuicideBomberDamageTF[5] = {0.0, 133.0, 175.0, 250.0, 300.0}; 
 
-new Float:UnholySpeed[5] = {1.0, 1.10, 1.15, 1.20, 1.30};
+new Float:UnholySpeed[5] = {1.0, 1.10, 1.20, 1.30, 1.40};
 new Float:LevitationGravity[5] = {1.0, 0.75, 0.6, 0.5, 0.4};
-new Float:VampirePercent[5] = {0.0, 0.05, 0.10, 0.15, 0.20};
+new Float:VampirePercent[5] = {0.0, 0.10, 0.15, 0.20, 0.25};
 
 new bool:UltimatePrimed = false;
 new Float:UltimatePrimedTime = 5.0;
 new Float:UltimateSoundPrimedTime = 1.0;
 new String:primedSound[256];
 new Handle:UltimatePrimedTimerHandle;
+
+new String:explosionSound[256];
 
 new SKILL_LEECH, SKILL_SPEED, SKILL_LOWGRAV, SKILL_SUICIDE;
 
@@ -54,6 +56,9 @@ public OnMapStart()
 {
     War3_AddSoundFolder(primedSound, sizeof(primedSound), "primed.mp3");
     War3_AddCustomSound(primedSound);
+
+    War3_AddSoundFolder(explosionSound, sizeof(explosionSound), "explosion.mp3");
+    War3_AddCustomSound(explosionSound);
 }
 
 public OnWar3LoadRaceOrItemOrdered(num)
@@ -136,7 +141,7 @@ public OnWar3EventDeath(victim, attacker)
     {
         decl Float:fVictimPos[3];
         GetClientAbsOrigin(victim, fVictimPos);
-        
+        W3EmitSoundToAll(explosionSound, client);
         War3_SuicideBomber(victim, fVictimPos, GameTF() ? SuicideBomberDamageTF[skill] : SuicideBomberDamage[skill], SKILL_SUICIDE, SuicideBomberRadius[skill]);        
     } 
 }
