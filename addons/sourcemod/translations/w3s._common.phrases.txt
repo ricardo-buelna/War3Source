@@ -1157,9 +1157,9 @@
 	{
 		"en"		"You pull on your socks."
 	}
-    "Your footsteps become silent"
+    "You levitate a few feet above the ground"
 	{
-		"en"		"Your footsteps become silent"
+		"en"		"You levitate a few feet above the ground"
 	}
 	"+30 HP"
 	{

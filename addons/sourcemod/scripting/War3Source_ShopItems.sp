@@ -261,7 +261,7 @@ public OnWar3EventSpawn(client)
 
     if(War3_GetOwnsItem(client, iShopitem[ITEM_AMULET]))
     {
-        War3_ChatMessage(client, "%T", "Your footsteps become silent", client);
+        War3_ChatMessage(client, "%T", "You levitate a few feet above the ground", client);
     }
     
     if(War3_GetGame() != Game_TF && 
@@ -374,7 +374,7 @@ public OnItemPurchase(client,item)
        
         if(IsPlayerAlive(client))
         {
-            War3_ChatMessage(client, "%T", "Your footsteps become silent", client);
+            War3_ChatMessage(client, "%T", "You levitate a few feet above the ground", client);
         }
     }
     

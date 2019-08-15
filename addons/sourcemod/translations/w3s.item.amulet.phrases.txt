@@ -2,10 +2,9 @@
 {
 	"amulet_ItemName"
 	{
-		"en"		"Amulet of the Cat"
+		"en"		"Amulet of Levitation"
 	}
 	"amulet_ItemDesc"
 	{
-		"en"		"Your footsteps will be silent"
-	}
+		"en"		"Levitates you a few feet above the ground, removing your footsteps."
 }

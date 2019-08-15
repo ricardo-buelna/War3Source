@@ -542,7 +542,7 @@ public War3Source_WeaponChangeEvent(Handle:event,const String:name[],bool:dontBr
 public War3Source_PlayerFootstepEvent(Handle:event, const String:name[], bool:dontBroadcast)
 {
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    if (W3GetBuffHasTrue(client, bSilent)) // Player has Amulet of the Cat, setting flag to 4 Meaning player is crouching.
+    if (W3GetBuffHasTrue(client, bSilent)) // Player has Amulet of Levitation, setting flag to 4 Meaning player is crouching.
     {
         SetEntProp(client, Prop_Data, "m_fFlags", 4);
     }
